@@ -1,0 +1,19 @@
+.base-bg-gray{
+    background: #f8f8f8!important;
+}
+
+.base-bg-primary{
+    background:#4666a3!important;
+}
+
+.base-cl-primary{
+    color:#4666a3!important;
+}
+
+.base-font-title{
+    font-size: 30px;
+    font-weight: 600;
+    color: rgba(51, 51, 51, 1.00);
+    font-family: 'Dosis', sans-serif;
+    text-transform: uppercase;
+}
