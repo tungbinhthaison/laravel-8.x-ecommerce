@@ -3,16 +3,17 @@
 <div class="container-fluid">
     <div class="card my-4">
         <h4 class="card-header">
-            Category
+            User
         </h4>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="listCategory" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="listUser" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Parent</th>
-                            <th>Slug</th>
+                            <th>Username</th>
+                            <th>Full name</th>
+                            <th>Email</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -23,22 +24,22 @@
         </div>
     </div>
 
-    <!-- Delete Category Modal -->
+    <!-- Delete User Modal -->
     <div class="modal" id="deleteModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Category Delete</h4>
+                    <h4 class="modal-title">User Delete</h4>
                     <button type="button" class="cancel-delete btn btn-default" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <h4>Are you sure want to delete this Category?</h4>
+                    <h4>Are you sure want to delete this User?</h4>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn base-bg-yellow text-white" id="submitDeleteCategory">Yes</button>
+                    <button type="button" class="btn base-bg-yellow text-white" id="submitDeleteUser">Yes</button>
                     <button type="button" class="btn btn-default cancel-delete" data-dismiss="modal">No</button>
                 </div>
             </div>
@@ -50,20 +51,25 @@
 <script>
     $(document).ready(function() {
 
-        var editor = $('#listCategory').DataTable({
+        var editor = $('#listUser').DataTable({
             responsive: true,
             processing: false,
             serverSide: true,
-            ajax: '/admin/blog/category/get-list-datatable',
+            ajax: '/admin/user/get-list-datatable',
             columns: [
                 {
-                    data: 'title'
+                    data: 'username'
                 },
                 {
-                    data: 'parent_id'
+                    data: 'name'
                 },
                 {
-                    data: 'slug'
+                    data: 'email'
+                },
+                {
+                    render: function (data, type, row) {
+                        return row["status"] == 1 ? "Đang hoạt động" : "Không hoạt động";
+                    }
                 },
                 {
                     data: 'Actions'
@@ -75,10 +81,10 @@
         var _editID;
         $('body').on('click', '.btn-edit', function(){
             _editID = $(this).data('id');
-            window.location.href = "/admin/blog/category/edit/" + _editID;
+            window.location.href = "/admin/user/edit/" + _editID;
         })
 
-        // Delete Category Ajax request.
+        // Delete User Ajax request.
 
         var _deleteID;
         $('body').on('click', '.btn-delete', function(){
@@ -86,7 +92,7 @@
             _deleteID = $(this).data('id');
         })
 
-        $('#submitDeleteCategory').click(function(e) {
+        $('#submitDeleteUser').click(function(e) {
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -94,11 +100,11 @@
                 }
             });
             $.ajax({
-                url: "/admin/blog/category/delete/" + _deleteID,
+                url: "/admin/user/delete/" + _deleteID,
                 method: 'DELETE',
                 success: function(result) {
                     setInterval(function(){ 
-                        $('#listCategory').DataTable().ajax.reload();
+                        $('#listUser').DataTable().ajax.reload();
                         $('#deleteModal').hide();
                     }, 1000);
                 }

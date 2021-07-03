@@ -6,33 +6,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Dashboard - SB Admin</title>
         <link href="{{ asset('css/library/dataTables.bootstrap4.min.css') }}" rel="stylesheet" crossorigin="anonymous" />
         <link href="{{ asset('admin/css/library/template.css') }}" rel="stylesheet" />
+        <link href="{{ asset('admin/css/custom/style.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/custom/base.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <nav class="sb-topnav navbar navbar-expand base-bg-gray">
+            <a class="navbar-brand text-muted" href="/">D A S H  B O A R D</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 base-cl-primary" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <!-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
-            </form>
+            </form> -->
             <!-- Navbar-->
-            <ul class="navbar-nav ml-auto ml-md-0">
+            <ul class="navbar-nav d-md-inline-block form-inline ml-auto mr-0 my-2 my-md-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle base-cl-primary" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <a class="dropdown-item" href="/admin/user/edit/{{session()->get('CurrentUser')->id}}">Profile</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="/">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -43,26 +45,16 @@
                 <main>
                     @yield('admin-content')
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
+        
         <script src="{{ asset('js/library/jquery-3.5.1.min.js') }}" crossorigin="anonymous"></script>
         <script src="{{ asset('js/library/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
         <script src="{{ asset('js/library/jquery.dataTables.min.js') }}" crossorigin="anonymous"></script>
         <script src="{{ asset('js/library/dataTables.bootstrap4.min.js') }}" crossorigin="anonymous"></script>
         <script src="{{ asset('js/library/font-awesome-5.13.0.all.min.js') }}"></script>
         <script src="{{ asset('admin/js/library/start-bootstrap.js') }}"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         @yield('admin-script')
     </body>
 </html>

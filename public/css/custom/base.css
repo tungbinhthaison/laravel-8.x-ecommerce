@@ -6,8 +6,16 @@
     background:#4666a3!important;
 }
 
+.base-bg-yellow{
+    background:#d2a637!important;
+}
+
 .base-cl-primary{
     color:#4666a3!important;
+}
+
+.base-cl-yellow{
+    color:#d2a637!important;
 }
 
 .base-font-title{
@@ -17,3 +25,9 @@
     font-family: 'Dosis', sans-serif;
     text-transform: uppercase;
 }
+
+.page-item.active .page-link{
+    background:#4666a3!important;
+    border-color: #4666a3!important;
+}
+

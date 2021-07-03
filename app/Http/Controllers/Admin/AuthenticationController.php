@@ -19,27 +19,31 @@ class AuthenticationController extends Controller
     }
 
     public function postLogin(AuthenticationRequest $request){
-       $comparision = [
+       $params = [
             'username' => $request->txt_username
            ,'password' => md5($request->txt_password)
         ];
         
-       $account = DB::table('users')->where($comparision)->count();
-
+       $account = DB::table('users')->where($params)->first();
+       
        if( !empty($account) ){
-            $this->rememberMe($request->txt_username, $request->txt_password, $request->cb_remember_password);
+            $request->session()->put('CurrentUser',$account);
+            $this->rememberMe($account);
             return redirect('/admin/home')->with('success', 'Welcome admin');
        }
+
+       return redirect()->back();
     }
 
-    private function rememberMe($username, $password, $remember){
+    private function rememberMe($account){
         Cookie::forget('username');
         Cookie::forget('password');
 
+        $lifeTime = 0.1; //minute
         if( !empty($remember) ){
-            $lifeTime = 0.1; //minute
-            Cookie::queue('username', $username, $lifeTime);
-            Cookie::queue('password', $password, $lifeTime);
+            Cookie::queue('username', $account->username, $lifeTime);
+            Cookie::queue('password', $account->password, $lifeTime);
         }
+
     }
 }

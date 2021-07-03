@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Blog\CategoryController;
+use App\Http\Controllers\Admin\Blog\Backend\BCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +16,10 @@ use App\Http\Controllers\Admin\Blog\CategoryController;
 */
 
 // Blog
-Route::prefix('blog')->group(function () {
-    Route::prefix('category')->group(function () {
-        Route::get('get-list',[CategoryController::class, 'getList']);
-    });
-});
+// Route::prefix('blog')->group(function () {
+//     Route::prefix('category')->group(function () {
+//         Route::get('get-list',[BCategoryController::class, 'getList']);
+//         Route::get('get-list-datatable',[BCategoryController::class, 'getListDatatable']);
+
+//     });
+// });
